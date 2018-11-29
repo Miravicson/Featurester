@@ -1,0 +1,23 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+{% if title %}{{ title }} - Requester{% else %}Requester{% endif %}
+{% endblock title %}
+
+{% block styles %}
+
+{{ super() }}
+
+{% include 'css.html' %}
+    
+{% endblock styles %}
+
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+block
+
+{% block scripts %}
+    {{ super() }}
+
+    {% include 'js.html' %}
+{% endblock scripts %}
