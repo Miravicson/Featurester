@@ -1,0 +1,29 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+    background-color: #eee;
+}
+
+.navbar{
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    background: url('/static/img/background2.jpg');
+}
+
+.header {
+    background: url('/static/img/background2.jpg');
+    min-height: 100vh;
+    border-radius: 0;
+    color: white; 
+    font-weight: bolder;
+
+}
+
+td {
+    vertical-align: middle;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+}

@@ -1,14 +1,87 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="row">
-<div class="col header jumbotron align-middle">
-        {% include 'header.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-4 header order-2">
+            {% include 'header.html' %}
+        </div>
+        <div class="col-12 col-md-8 order-1 content pt-3 px-2">
+            <section class="client col-12">
+                <div class="card  bg-light mb-2">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <tbody class="align-middle">
+                                    <tr class="align-middle">
+                                        <td><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}" class="rounded-circle border border-primary"
+                                                alt="" width="30px" height="30px"></td>
+                                        <td>Client A</td>
+                                        <td><span class="badge badge-pill badge-primary">4</span> <small>Feature
+                                                Request</small></td>
+                                        <td> <small>Add Navigation Bar</small> </td>
+                                        <td><small>Date Due: 2nd October, 2019</small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}" class="rounded-circle border border-primary"
+                                                alt="" width="30px" height="30px"></td>
+                                        <td>Client B</td>
+                                        <td><span class="badge badge-pill badge-primary">4</span> <small>Feature
+                                                Request</small></td>
+                                        <td> <small>Add Navigation Bar</small> </td>
+                                        <td><small>Date Due: 2nd October, 2019</small></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}" class="rounded-circle border border-primary"
+                                                alt="" width="30px" height="30px"></td>
+                                        <td>Client C</td>
+                                        <td><span class="badge badge-pill badge-primary">4</span> <small>Feature
+                                                Request</small></td>
+                                        <td> <small>Add Navigation Bar</small> </td>
+                                        <td><small>Date Due: 2nd October, 2019</small></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-    </div>
-    <div class="col content jumbotron">
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            <div class="row mx-1 my-4">
+                <section class="col-6 mx-auto">
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted text-center">Top Requests</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="col-6 mx-auto">
+                    <div class="card bg-light mb-3">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted text-center">Product Areas</h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Policies</li>
+                                <li class="list-group-item">Billings</li>
+                                <li class="list-group-item">Claims</li>
+                                <li class="list-group-item">Reports</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+        </div>
     </div>
+
 </div>
 
 

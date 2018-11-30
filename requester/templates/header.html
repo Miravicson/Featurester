@@ -1,14 +1,10 @@
-<header>
+{% block header_text %}
+<h1 class="text-center mt-5 py-3 display-4">We care a great deal about your features.</h1>
+{% endblock header_text %}
 
-    {% block header_text %}
-    <h1 class="text-center">We are pleased knowing you are satisfied with our application. Here is a portal to
-        make a request for the amazing features that you desire.</h1>
-    {% endblock header_text %}
+{% block header_action %}
+<div class="action text-center my-2">
+    <a href="" class="btn btn-lg btn-outline-light px-5 py-3" role="button">Add Feature Request</a>
+</div>
 
-    {% block header_action %}
-    <div class="action text-center my-3 py-3">
-        <a href="" class="btn btn-lg btn-outline-light px-5 py-3" role="button">Make Request</a>
-    </div>
-
-    {% endblock header_action %}
-</header>
+{% endblock header_action %}
