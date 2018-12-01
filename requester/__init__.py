@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
-
+from requester.features.forms import FeatureForm
 # Initialize app
 app = Flask(__name__)
 # Configure app from settings attached to the environmet variable loaded from the .env file or production environment variable
