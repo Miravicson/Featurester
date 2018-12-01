@@ -7,17 +7,27 @@
 
 {{ super() }}
 
-{% include 'css.html' %}
+{% include 'snippets/css.html' %}
     
 {% endblock styles %}
 
+{% block body %}
+    
 {% block navbar %}
-{% include 'navbar.html' %}
+{% include 'snippets/navbar.html' %}
 {% endblock navbar %}
-block
+{% block content %}
+    
+{% endblock content %}
+{% block footer %}
+    {% include 'snippets/footer.html' %}
+{% endblock footer %}
 
 {% block scripts %}
     {{ super() }}
 
-    {% include 'js.html' %}
+    {% include 'snippets/js.html' %}
 {% endblock scripts %}
+
+{% endblock body %}
+

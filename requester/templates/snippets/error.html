@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid mb-0">
+    <div class="row">
+        <!-- Header Starts here -->
+        <div class="col-12 col-md-4 header order-2">
+            {% include 'snippets/header.html' %}
+        </div>
+
+        <!-- Content Starts here -->
+        <div class="col-12 col-md-8 order-1 content pt-5 px-5">
+            <section class="client col-12">
+                <h1 class="display-2">Error {{ code }} </h1>
+            </section>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}

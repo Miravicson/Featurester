@@ -9,11 +9,11 @@ body {
 .navbar{
     padding-top: 2px !important;
     padding-bottom: 2px !important;
-    background: url('/static/img/background2.jpg');
+    background: url('/static/img/background.jpg');
 }
 
 .header {
-    background: url('/static/img/background2.jpg');
+    background: url('/static/img/background.jpg');
     min-height: 100vh;
     border-radius: 0;
     color: white; 
