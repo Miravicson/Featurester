@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+{% include 'features/mod_add_feature.html' %}
+
 <div class="container-fluid mb-0">
     <div class="row">
         <!-- Header Starts here -->
@@ -11,36 +13,37 @@
         <!-- Content Starts here -->
         <div class="col-12 col-md-8 order-md-1 content pt-3 px-2">
             <section class="client col-12">
-                <div class="card  bg-light mb-2">
+                <div class="card  bg-light mb-2 shadow">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-sm">
                                 <tbody class="align-middle">
                                     <tr class="align-middle">
-                                        <td><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}" class="rounded-circle border border-primary"
-                                                alt="" width="30px" height="30px"></td>
+
+                                        <td class="d-none d-sm-none d-md-block"><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}"
+                                                class="rounded-circle border border-primary" alt="" width="30px" height="30px"></td>
                                         <td>Client A</td>
                                         <td><span class="badge badge-pill badge-primary">4</span> <small>Feature
                                                 Request</small></td>
-                                        <td> <small>Add Navigation Bar</small> </td>
+                                        <td class="d-none d-sm-none d-md-block"> <small>Add Navigation Bar</small> </td>
                                         <td><small>Date Due: 2nd October, 2019</small></td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}" class="rounded-circle border border-primary"
-                                                alt="" width="30px" height="30px"></td>
+                                        <td class="d-none d-sm-none d-md-block"><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}"
+                                                class="rounded-circle border border-primary" alt="" width="30px" height="30px"></td>
                                         <td>Client B</td>
                                         <td><span class="badge badge-pill badge-primary">4</span> <small>Feature
                                                 Request</small></td>
-                                        <td> <small>Add Navigation Bar</small> </td>
+                                        <td class="d-none d-sm-none d-md-block"> <small>Add Navigation Bar</small> </td>
                                         <td><small>Date Due: 2nd October, 2019</small></td>
                                     </tr>
                                     <tr>
-                                        <td><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}" class="rounded-circle border border-primary"
-                                                alt="" width="30px" height="30px"></td>
+                                        <td class="d-none d-sm-none d-md-block"><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}"
+                                                class="rounded-circle border border-primary" alt="" width="30px" height="30px"></td>
                                         <td>Client C</td>
                                         <td><span class="badge badge-pill badge-primary">4</span> <small>Feature
                                                 Request</small></td>
-                                        <td> <small>Add Navigation Bar</small> </td>
+                                        <td class="d-none d-sm-none d-md-block"> <small>Add Navigation Bar</small> </td>
                                         <td><small>Date Due: 2nd October, 2019</small></td>
                                     </tr>
                                 </tbody>
@@ -53,7 +56,7 @@
 
             <div class="row mx-1 my-4">
                 <section class="col-12 col-md-6 mx-auto">
-                    <div class="card bg-light mb-3">
+                    <div class="card bg-light mb-3 shadow">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted text-center">Top Requests</h6>
                             <ul class="list-group list-group-flush">
@@ -67,7 +70,7 @@
                 </section>
 
                 <section class="col-12 col-md-6 mx-auto">
-                    <div class="card bg-light mb-3">
+                    <div class="card bg-light mb-3 shadow">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted text-center">Product Areas</h6>
                             <ul class="list-group list-group-flush">
