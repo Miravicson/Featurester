@@ -6,8 +6,6 @@ from flask import Flask, render_template, flash, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 import datetime
-f
-
 
 # Initialize app
 app = Flask(__name__)

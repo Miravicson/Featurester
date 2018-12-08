@@ -26,7 +26,7 @@ class Feature(db.Model):
     target_date = db.Column(db.DateTime, nullable=False)
     client_id = db.Column(db.Integer, db.ForeignKey(
         'client.id'), nullable=False)
-    product_areas = db.relationship('ProductArea', secondary=product_areas, lazy='subquery',
+    product_areas = db.relationship('ProductArea', secondary='product_areas', lazy='subquery',
                                     backref=db.backref('features', lazy=True))
     def __repr__(self):
         return '<Feature {}>'.format(self.title)
