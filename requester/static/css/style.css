@@ -31,3 +31,15 @@ td {
     box-shadow: 0 10 black;
     border-radius: 0;
 }
+
+.card {
+    -webkit-box-shadow: 0 0 2px black;
+    -moz-box-shadow: 0 0 2px black;
+    box-shadow: 0 0 2px black;
+    text-align: center;
+    z-index: 100;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius:0 ;
+    font-size: 4em;
+}
