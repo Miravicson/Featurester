@@ -1,0 +1,22 @@
+<form method="post" role="form" action="">
+    {{ form2.hidden_tag() }}
+
+    <div class="form-group">
+        {{form2.name.label}}
+        {{form2.name(class='form-control form-control-sm')}}
+        {% for error in form2.name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        {{form2.email.label}}
+        {{form2.email(class='form-control form-control-sm', type='email')}}
+        {% for error in form2.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+
+    {{ form2.submit(class="btn btn-outline-dark btn-block text-light", style="background:
+    url('/static/img/background.jpg');") }}
+</form>

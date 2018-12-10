@@ -16,9 +16,12 @@
 {% block navbar %}
 {% include 'snippets/navbar.html' %}
 {% endblock navbar %}
+
 {% block content %}
     
 {% endblock content %}
+
+
 {% block footer %}
     {% include 'snippets/footer.html' %}
 {% endblock footer %}
@@ -27,6 +30,8 @@
     {{ super() }}
 
     {% include 'snippets/js.html' %}
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
 {% endblock scripts %}
 
 {% endblock body %}

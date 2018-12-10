@@ -1,84 +1,139 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- Included the Modal Here -->
-{% include 'features/mod_add_feature.html' %}
+    {% block modal %}
+        <!-- Included the Modal Here -->
+        {% include 'features/mod_add_feature.html' %}
 
-<div class="container-fluid mb-0">
-    <div class="row">
-        <!-- Header Starts here -->
-        <div class="col-12 col-md-4 header order-md-2">
-            {% include 'snippets/header.html' %}
-        </div>
+    {% endblock modal %}
 
-        <!-- Content Starts here -->
-        <div class="col-12 col-md-8 order-md-1 content pt-3 px-2">
-            <section class="client col-12">
-                <div class="card  bg-light mb-2 shadow">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <tbody class="align-middle">
-                                    {% for client in clients %}
-                                    <tr class="align-middle">
+    <div class="container-fluid mb-0">
+        <div class="row">
+            <!-- Header Starts here -->
+            <div class="col-12 col-md-4 header order-md-2">
+                {% include 'snippets/header.html' %}
+            </div>
+            {% block other_content %}
+                <!-- Content Starts here -->
 
-                                        <td class="d-none d-sm-none d-md-block"><img src="{{ url_for('static', filename='img/avatar-1577909.svg')}}"
-                                                class="rounded-circle border border-primary" alt="" width="30px" height="30px"></td>
-                                        <td>{{ client.name }}</td>
-                                        <td><span class="badge badge-pill badge-primary">{{ client.features | length }}</span>
-                                            <small>Feature
-                                                Request</small></td>
-                                        <td class="d-none d-sm-none d-md-block"> <small>{% if client.features %}
-                                            {{client.features[-1].title}}
-                                                {% else %}
-                                                Add Navigation Bar
-                                                {% endif %}</small> </td>
-                                        <td><small>Date Due: 2nd October, 2019</small></td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
 
+                <div class="col-12 col-md-8 order-md-1 content pt-3 px-2">
+
+                    <!-- Clients -->
+                    <section class="client col-12">
+                        <div class="card  bg-light mb-2 shadow">
+                            {% if clients %}
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <tbody class="align-middle">
+
+                                            {% for client in clients %}
+                                                <tr class="align-middle">
+
+                                                    <td class="d-none d-sm-none d-md-block"><img
+                                                            src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
+                                                            class="rounded-circle border border-primary" alt=""
+                                                            width="30px"
+                                                            height="30px"></td>
+                                                    <td>{{ client.name }}</td>
+                                                    <td><span
+                                                            class="badge badge-pill badge-primary">{{ client.features | length }}</span>
+                                                        <small>Feature
+                                                            Request
+                                                        </small>
+                                                    </td>
+                                                    <td class="d-none d-sm-none d-md-block">
+                                                        <small>{% if client.features %}
+                                                            {{ client.features[-1].title }}
+                                                        {% else %}
+                                                            Add Navigation Bar
+                                                        {% endif %}</small>
+                                                    </td>
+                                                    <td>
+                                                        <small>Date Due:{% if client.features %}
+                                                            {{ moment(client.features[-1].target_date).format('MMMM Do, YYYY') }}
+                                                        {% else %}
+                                                            22, Dec 2018
+                                                        {% endif %}</small>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="text-center my-3 py-3">
+                                    <button class="btn btn-sm btn-outline-primary px-5 py-3" role="button"
+                                            data-toggle="modal" data-target="#addClientModal">Add
+                                        Client
+                                    </button>
+                                </div>
+
+                            {% endif %}
                         </div>
+                    </section>
+
+                    <div class="row mx-1 my-4">
+                        <!-- Feature Requests -->
+                        <section class="col-12 col-md-6 mx-auto">
+                            <div class="card bg-light mb-3 shadow">
+                                <div class="card-body">
+                                    {% if features %}
+                                        <h6 class="card-subtitle mb-2 text-muted text-center">Top Requests</h6>
+                                        <ul class="list-group list-group-flush">
+                                            {% for feature in features %}
+                                                <li class="list-group-item">{{ feature.title }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="text-center my-3 py-3">
+                                            <button class="btn btn-sm btn-outline-primary px-5 py-3" role="button"
+                                                    data-toggle="modal" data-target="#addFeatureModal">Add
+                                                Feature
+                                            </button>
+                                        </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="col-12 col-md-6 mx-auto">
+                            <div class="card bg-light mb-3 shadow">
+                                <div class="card-body">
+                                    {% if product_list %}
+                                        <h6 class="card-subtitle mb-2 text-muted text-center">Product Areas</h6>
+                                        <ul class="list-group list-group-flush">
+                                            {% for product in product_list %}
+                                                <li class="list-group-item">{{ product.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="text-center my-3 py-3">
+                                            <button class="btn btn-sm btn-outline-primary px-5 py-3" role="button"
+                                                    data-toggle="modal" data-target="#addProductModal">Add
+                                                Product Area
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </section>
+
+
                     </div>
                 </div>
-            </section>
-
-            <div class="row mx-1 my-4">
-                <section class="col-12 col-md-6 mx-auto">
-                    <div class="card bg-light mb-3 shadow">
-                        <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted text-center">Top Requests</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Make Changes to Insurance Policies</li>
-                                <li class="list-group-item">Create a new Product Line</li>
-                                <li class="list-group-item">Consider Reducing Cost For Bulk Purchasers</li>
-                                <li class="list-group-item">Review Your Claims Policy</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="col-12 col-md-6 mx-auto">
-                    <div class="card bg-light mb-3 shadow">
-                        <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted text-center">Product Areas</h6>
-                            <ul class="list-group list-group-flush">
-                                {% for product in product_list %}
-                                <li class="list-group-item">{{ product.name }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+            {% endblock other_content %}
 
 
-            </div>
         </div>
 
     </div>
-
-</div>
 
 
 {% endblock content %}

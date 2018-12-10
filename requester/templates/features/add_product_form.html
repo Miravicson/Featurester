@@ -1,0 +1,14 @@
+<form method="post" role="form" action="">
+    {{ form3.hidden_tag() }}
+
+    <div class="form-group">
+        {{form3.name.label}}
+        {{form3.name(class='form-control form-control-sm')}}
+        {% for error in form3.name.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </div>
+
+    {{ form3.submit(class="btn btn-outline-dark btn-block text-light", style="background:
+    url('/static/img/background.jpg');") }}
+</form>
