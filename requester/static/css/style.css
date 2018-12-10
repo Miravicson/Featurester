@@ -4,16 +4,48 @@ body {
     padding: 0;
     max-height: 100vh;
     background-color: #eee;
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
 }
+
+
 
 .navbar{
     padding-top: 2px !important;
     padding-bottom: 2px !important;
-    background: url('/static/img/background.jpg');
+    background-color: #fff !important;
+    box-shadow: 0px 0px 10px #222222;
+    z-index: 500;
 }
 
+.navbar-dark {
+    background-color: #0d6eaa !important;
+}
+
+/*General css styles*/
+
+.navbar-toggler, .navbar-toggler:focus {
+    border: none;
+    outline: none !important;
+
+}
+.navbar-toggler-icon {
+    color: #fff;
+}
+
+
+.nav-link {
+  font-size: 1.1em !important;
+}
+
+
+
+
+
 .header {
-    background: url('/static/img/background.jpg');
+    background-color: #0d6eaa !important;
     min-height: 100vh;
     border-radius: 0;
     color: white; 
@@ -27,10 +59,7 @@ td {
     text-align: center;
     font-size: 14px;
 }
-.shadow {
-    box-shadow: 0 10 black;
-    border-radius: 0;
-}
+
 
 .card {
     -webkit-box-shadow: 0 0 2px black;
@@ -41,5 +70,9 @@ td {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius:0 ;
-    font-size: 4em;
+}
+
+.modal-style{
+    /*background-color:#0d6eaa !important ;*/
+    background:#0d6eaa !important ;
 }
