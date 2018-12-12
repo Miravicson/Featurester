@@ -34,37 +34,80 @@ from requester.features.forms import FeatureForm, ClientForm, ProductAreaForm
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def index():
+    """ The main view function, serves the home page of the dashboard and handles 3 forms for
+    adding Features, adding Clients and adding Product Areas"""
     clients = Client.query.limit(3).all()
     products = ProductArea.query.order_by('id').limit(5).all()
-    features = Feature.query.order_by('id').limit(5).all()
+    features = Feature.query.order_by('client_priority').limit(5).all()
     form = FeatureForm()
+    # populate the list of clients for the add feature form
     form.client_id.choices = [(c.id, c.name) for c in clients]
+    # populate the list of product areas for the add feature form
     form.product_areas.choices = [(p.id, p.name) for p in products]
     form2 = ClientForm()
     form3 = ProductAreaForm()
 
-    if form.validate_on_submit():
-        data = dict()
-        data["title"] = form.title.data
-        data["description"] = form.description.data
-        data["target_date"] = form.target_date.data
-        priority = form.client_priority.data
-        data['client_priority'] = priority
-        client_id = form.client_id.data
-        data["client"] = Client.query.get(int(client_id))
-        product_areas = form.product_areas.data
-        product_areas = [ProductArea.query.get(int(i)) for i in product_areas]
-        f = Feature(**data)
+    def add_commit_feature(input_data):
+        """takes forms data and create an instance of a feature adds to a session and makes commit"""
 
-        # check for clash of priority and update the older priorities , moving them down the chain
-        c = Client.query.get(client_id)
-        # higher_priority =
-        # app.logger.warning(higher_priority)
-
+        f = Feature(**input_data)
+        product_areas = [ProductArea.query.get(int(i)) for i in input_data.get('product_areas')]
         for product_area in product_areas:
             product_area.features.append(f)
         db.session.add(f)
         db.session.commit()
+
+    def get_feature_form_input():
+        """Gets the input form data and packs it into a dictionary"""
+        data = dict()
+        data["title"] = form.title.data
+        data["description"] = form.description.data
+        data["target_date"] = form.target_date.data
+        data['client_priority'] = form.client_priority.data
+        data["client"] = Client.query.get(int(form.client_id.data))
+        data["product_areas"] = form.product_areas.data
+        return data
+
+    if form.validate_on_submit():
+        form_data = get_feature_form_input()
+        priority = form_data.get('client_priority')
+        client_id = form_data['client'].id
+
+        # Get all the features belonging to the particular client
+        client_features = db.session.query(Feature).filter(Feature.client_id == client_id).all()
+
+        # when no feature has been added to the client, just add the feature
+        if not client_features:
+            add_commit_feature(form_data)
+            app.logger.warning("I entered this if statement")
+
+        # Add feature if the current client priority has not been taken.
+        elif not list(filter(lambda x: x.client_priority == 1, client_features)):
+            add_commit_feature(form_data)
+        else:
+            # Get all feature entries with priorities equal to or higher than the input priority
+            equal_or_higher = sorted(filter(lambda x: x.client_priority >= priority, client_features),
+                                     key=lambda x: x.client_priority)
+            # create an accumulator to compare previous priorities of adjacent entries in an ordered
+            #   list
+            accumulator = list()
+            for idx in range(0, len(equal_or_higher)):
+                # for the first time in the list of equal or higher, check to see if there is an equal priority
+                if idx == 0:
+                    if equal_or_higher[idx].client_priority == priority:
+                        accumulator.append(priority + 1)
+                        equal_or_higher[idx].client_priority = priority + 1
+                        db.session.add(equal_or_higher[idx])
+                    else:
+                        accumulator.append(equal_or_higher[idx].client_priority)
+                elif equal_or_higher[idx].client_priority == accumulator[-1]:
+                    accumulator.append(equal_or_higher[idx].client_priority + 1)
+                    equal_or_higher[idx].client_priority = accumulator[-2] + 1
+                    db.session.add(equal_or_higher[idx])
+                else:
+                    accumulator.append(equal_or_higher[idx].client_priority)
+            add_commit_feature(form_data)
+
         return redirect(url_for('index'))
     else:
         flash(form.errors)

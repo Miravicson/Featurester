@@ -1,8 +1,8 @@
 from builtins import sorted
 
-unsorted_list = [1, 3, 4, 5, 7, 11, 24, 26, 27, 28, 29]
+unsorted_list = [1]
 
-num_ins = 3
+num_ins = 1
 
 num_greater = sorted(list(filter(lambda f: f >= num_ins, unsorted_list)))
 print(num_greater)
@@ -18,7 +18,7 @@ for idx in range(0, len(num_greater)):
             res.append(num_ins + 1)
         else:
             res.append(num_greater[idx])
-    elif num_greater[idx] - res[-1] == 0:
+    elif num_greater[idx] == res[-1]:
         res.append(num_greater[idx] + 1)
     else:
         res.append(num_greater[idx])
