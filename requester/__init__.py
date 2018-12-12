@@ -48,12 +48,19 @@ def index():
         data["title"] = form.title.data
         data["description"] = form.description.data
         data["target_date"] = form.target_date.data
-        data['client_priority'] = form.client_priority.data
+        priority = form.client_priority.data
+        data['client_priority'] = priority
         client_id = form.client_id.data
         data["client"] = Client.query.get(int(client_id))
         product_areas = form.product_areas.data
         product_areas = [ProductArea.query.get(int(i)) for i in product_areas]
         f = Feature(**data)
+
+        # check for clash of priority and update the older priorities , moving them down the chain
+        c = Client.query.get(client_id)
+        # higher_priority =
+        # app.logger.warning(higher_priority)
+
         for product_area in product_areas:
             product_area.features.append(f)
         db.session.add(f)
