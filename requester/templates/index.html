@@ -89,7 +89,7 @@
                                             <li class="list-group-item"><small>Title ||  Priority || Client</small></li>
 
                                             {% for feature in features %}
-                                                <li class="list-group-item"><small>{{ feature.title }} || {{ feature.client_priority }} || Client: {{ feature.client.name }}</small></li>
+                                                <li class="list-group-item"><small>{{ feature.title }} || &nbsp; {{ feature.client_priority }} || &nbsp; {{ feature.client.name }}</small></li>
                                             {% endfor %}
                                         </ul>
                                     {% else %}
