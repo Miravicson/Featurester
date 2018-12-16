@@ -1,0 +1,45 @@
+<div class="">
+    <div class="card my-4 py-5">
+
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="features-tab" data-toggle="tab" href="#features" role="tab"
+                   aria-controls="features" aria-selected="true"><span class="tab-title">Add Features </span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="clients-tab" data-toggle="tab" href="#clients" role="tab"
+                   aria-controls="clients"
+                   aria-selected="false"><span class="tab-title">Add Clients</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab"
+                   aria-controls="products"
+                   aria-selected="false"><span class="tab-title">Product Areas</span> </a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="features" role="tabpanel"
+                 aria-labelledby="features-tab">
+                <div class="container py-5">{% include 'features/add_feature_form.html' %}</div>
+            </div>
+            <div class="tab-pane" id="clients" role="tabpanel"
+                 aria-labelledby="clients-tab">
+                <div class="container py-5">{% include 'features/add_client_form.html' %}</div>
+            </div>
+            <div class="tab-pane" id="products" role="tabpanel"
+                 aria-labelledby="products-tab">
+                <div class="container py-5">{% include 'features/add_product_form.html' %}</div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+

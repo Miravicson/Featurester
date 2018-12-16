@@ -1,19 +1,20 @@
 {% block header_text %}
-    <h1 class="text-center mt-5 py-3 display-4">We care a great deal about your features.</h1>
+{#    <h1 class="text-center mt-5 py-3 display-4">We care a great deal about your features.</h1>#}
+    {% include 'snippets/tabed_form.html' %}
 {% endblock header_text %}
 
 {% block header_action %}
-    <div class="btn-group action px-auto my-2" role="group">
-        <button class="btn btn-sm btn-outline-light px-2 py-3" role="button" data-toggle="modal"
-                data-target="#addFeatureModal">Add
-            Feature Request
-        </button>
-        <button class="btn btn-sm btn-outline-light px-2 py-3" role="button" data-toggle="modal"
-                data-target="#addClientModal">Add Client
-        </button>
-        <button class="btn btn-sm btn-outline-light px-2 py-3" role="button" data-toggle="modal"
-                data-target="#addProductModal">Add Product Area
-        </button>
-    </div>
+{#    <div class="btn-group action px-auto my-2" role="group">#}
+{#        <button class="btn btn-sm btn-outline-light px-2 py-3" role="button" data-toggle="modal"#}
+{#                data-target="#addFeatureModal">Add#}
+{#            Feature Request#}
+{#        </button>#}
+{#        <button class="btn btn-sm btn-outline-light px-2 py-3" role="button" data-toggle="modal"#}
+{#                data-target="#addClientModal">Add Client#}
+{#        </button>#}
+{#        <button class="btn btn-sm btn-outline-light px-2 py-3" role="button" data-toggle="modal"#}
+{#                data-target="#addProductModal">Add Product Area#}
+{#        </button>#}
+{#    </div>#}
 
 {% endblock header_action %}
