@@ -50,10 +50,13 @@ def index():
     def add_commit_feature(input_data):
         """takes forms data and create an instance of a feature adds to a session and makes commit"""
 
+        product_areas_form = input_data.pop('product_areas', None)
+
         f = Feature(**input_data)
-        product_areas = [ProductArea.query.get(int(i)) for i in input_data.get('product_areas')]
-        for product_area in product_areas:
-            product_area.features.append(f)
+        if product_areas_form:
+            product_areas = [ProductArea.query.get(i) for i in product_areas_form]
+            for product_area in product_areas:
+                product_area.features.append(f)
         db.session.add(f)
         db.session.commit()
 
