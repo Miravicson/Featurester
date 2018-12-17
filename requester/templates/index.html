@@ -29,35 +29,53 @@
                                             <tbody class="align-middle">
 
                                             {% for client in clients %}
+
                                                 <tr class="align-middle">
 
-                                                    <td class="d-none d-sm-none d-md-block"><img
-                                                            src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
-                                                            class="rounded-circle border border-primary" alt=""
-                                                            width="30px"
-                                                            height="30px"></td>
-                                                    <td>{{ client.name }}</td>
-                                                    <td><span
+                                                    <td class="d-none d-sm-none d-md-block">
+                                                        <a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                           style="text-decoration: none; cursor: pointer">
+                                                            <img
+                                                                src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
+                                                                class="rounded-circle border border-primary" alt=""
+                                                                width="30px"
+                                                                height="30px">
+                                                        </a>
+                                                    </td>
+
+                                                    <td><a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                           style="text-decoration: None; cursor: pointer">{{ client.name }}</a>
+                                                    </td>
+                                                    <td><a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                           style="text-decoration: None; cursor: pointer"><span
                                                             class="badge badge-pill badge-primary">{{ client.features | length }}</span>
                                                         <small>Feature
                                                             Request
                                                         </small>
+                                                    </a>
                                                     </td>
                                                     <td class="d-none d-sm-none d-md-block">
-                                                        <small>{% if client.features %}
-                                                            {{ client.features[-1].title }}
-                                                        {% else %}
-                                                            Add Navigation Bar
-                                                        {% endif %}</small>
+                                                        <a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                           style="text-decoration: None; cursor: pointer">
+                                                            <small>{% if client.features %}
+                                                                {{ client.features[-1].title }}
+                                                            {% else %}
+                                                                No features yet
+                                                            {% endif %}</small>
+                                                        </a>
                                                     </td>
-                                                    <td>
+                                                    <td><a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                           style="text-decoration: None; cursor: pointer">
                                                         <small>Date Due:{% if client.features %}
                                                             {{ moment(client.features[-1].target_date).format('MMMM Do, YYYY') }}
                                                         {% else %}
-                                                            22, Dec 2018
+                                                            No date attached
                                                         {% endif %}</small>
+                                                    </a>
                                                     </td>
+
                                                 </tr>
+
                                             {% endfor %}
 
 
@@ -86,10 +104,15 @@
                                     {% if features %}
                                         <h6 class="card-subtitle mb-2 text-muted text-center">Top Requests</h6>
                                         <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><small>Title ||  Priority || Client</small></li>
+                                            <li class="list-group-item">
+                                                <small>Title || Priority || Client</small>
+                                            </li>
 
                                             {% for feature in features %}
-                                                <li class="list-group-item"><small>{{ feature.title }} || &nbsp; {{ feature.client_priority }} || &nbsp; {{ feature.client.name }}</small></li>
+                                                <li class="list-group-item">
+                                                    <small>{{ feature.title }} || &nbsp; {{ feature.client_priority }}
+                                                        || &nbsp; {{ feature.client.name }}</small>
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                     {% else %}

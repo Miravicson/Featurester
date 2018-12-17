@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container-fluid mb-0">
+        <div class="row">
+            <!-- Header Starts here -->
+            <div class="col-12 col-md-4 header order-md-2">
+                <div>
+                    <div class="card my-4 py-5">
+                        <div class="mx-auto">
+                            <img
+                                    src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
+                                    class="rounded-circle border border-primary" alt=""
+                                    width="100px"
+                                    height="100px">
+                        </div>
+                        <div class="mx-auto text-center mt-3">
+                            <p>{{ client.name }}</p>
+                            <p>{{ client.email }}</p>
+                            <p>id {{ client.id }}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            {% block other_content %}
+                <div class="col-12 col-md-8 order-md-1 content pt-3 px-2">
+                    <div class="client col-12 mb-2">
+
+                        {% if features %}
+                            {% for feature in features %}
+                                <div class="card mt-2" style="width: inherit;">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <h6 class="card-title">{{ feature.title }}</h6>
+                                                <h6 class="card-subtitle mb-2 text-muted">Due
+                                                    Date: {{ moment(feature.target_date).format('MMMM Do, YYYY') }}</h6>
+                                                <p class="card-text"> Description: {{ feature.description }}</p>
+                                                <a href="#"
+                                                   class="card-link">Priority: {{ feature.client_priority }} </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 py-3">
+                                            <div class="container">
+                                                <button type="button" class="btn btn-outline-danger btn-block">Delete</button>
+                                                <button type="button" class="btn btn-outline-success btn-block">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center my-3 py-3">
+                                <button class="btn btn-sm btn-outline-primary px-5 py-3" role="button"
+                                        data-toggle="modal" data-target="#addFeatureModal">Add
+                                    Feature
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endblock other_content %}
+        </div>
+
+    </div>
+
+{% endblock content %}

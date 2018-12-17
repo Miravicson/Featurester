@@ -32,7 +32,6 @@ from requester.features.forms import FeatureForm, ClientForm, ProductAreaForm
 
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/home', methods=['GET', 'POST'])
 def index():
     """ The main view function, serves the home page of the dashboard and handles 3 forms for
     adding Features, adding Clients and adding Product Areas"""
@@ -138,3 +137,10 @@ def index():
 
     return render_template('index.html', product_list=products, clients=clients, features=features, form=form,
                            form2=form2, form3=form3)
+
+
+@app.route('/<int:client_id>', methods=['GET', 'POST'])
+def client_details(client_id):
+    client = Client.query.get_or_404(client_id)
+    features = db.session.query(Feature).filter(Feature.client_id == client_id).order_by('client_priority').all()
+    return render_template('features/client_details.html', client=client, features=features)
