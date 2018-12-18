@@ -8,7 +8,8 @@ from flask_moment import Moment
 app = Flask(__name__)
 # Configure app from settings attached to the environment variable loaded from the .env
 #  file or production environment variable
-app.config.from_object(os.environ['APP_SETTINGS'])
+# app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object(os.getenv('APP_SETTINGS'))
 
 # initialise database
 db = SQLAlchemy(app)
