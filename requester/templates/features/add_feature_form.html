@@ -2,43 +2,37 @@
     {{ form.hidden_tag() }}
 
     <div class="form-group">
-        {{form.title.label}}
-        {{form.title(class='form-control form-control-sm')}}
+        {{form.title(class='form-control form-control-sm', placeholder='Title')}}
         {% for error in form.title.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
 
     <div class="form-group">
-        {{form.description.label}}
-        {{form.description(class='form-control form-control-sm')}}
+        {{form.description(class='form-control form-control-sm', placeholder='Description')}}
         {% for error in form.description.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
     <div class="form-group">
-        {{form.client_priority.label}}
-        {{form.client_priority(class='form-control form-control-sm', type='number')}}
+        {{form.client_priority(class='form-control form-control-sm', type='number', min=0, placeholder='Priority')}}
         {% for error in form.client_priority.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
     <div class="form-group">
-        {{form.target_date.label}}
-        {{form.target_date(class='form-control form-control-sm', type='date')}}
+        {{form.target_date(class='form-control form-control-sm', type='date', placeholder='Date')}}
         {% for error in form.target_date.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
     <div class="form-group">
-        {{form.client_id.label}}
-        {{form.client_id(class='form-control form-control-sm')}}
+        {{form.client_id(class='form-control form-control-sm', placeholder='__Select Client__')}}
         {% for error in form.client_id.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
     <div class="form-group">
-        {{form.product_areas.label}}
         {{form.product_areas(class='form-control form-control-sm')}}
         {% for error in form.product_areas.errors %}
         <span style="color: red;">[{{ error }}]</span>

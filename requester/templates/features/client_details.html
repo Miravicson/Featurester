@@ -11,13 +11,16 @@
                             <img
                                     src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
                                     class="rounded-circle border border-primary" alt=""
-                                    width="100px"
-                                    height="100px">
+                                    width="150px"
+                                    height="150px">
                         </div>
-                        <div class="mx-auto text-center mt-3">
-                            <p>{{ client.name }}</p>
-                            <p>{{ client.email }}</p>
-                            <p>id {{ client.id }}</p>
+                        <div class="mx-auto mt-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><span class="text-left">Name:</span> <span class="text-right">{{ client.name }}</span></li>
+                                <li class="list-group-item"><span class="text-left">Email:</span> <span class="text-right">{{ client.email }}</span></li>
+                                <li class="list-group-item"><span class="text-left">Client ID:</span> <span class="text-right">{{ client.id }}</span></li>
+                                <li class="list-group-item"><span class="text-left">Feature Requests:</span> <span class="text-right">{{ client.features | length }}</span></li>
+                            </ul>
                         </div>
                     </div>
 
@@ -44,8 +47,10 @@
                                         </div>
                                         <div class="col-4 py-3">
                                             <div class="container">
-                                                <button type="button" class="btn btn-outline-danger btn-block">Delete</button>
-                                                <button type="button" class="btn btn-outline-success btn-block">Edit</button>
+                                                <button type="button" class="btn btn-outline-danger btn-block">Delete
+                                                </button>
+                                                <button type="button" class="btn btn-outline-success btn-block">Edit
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
