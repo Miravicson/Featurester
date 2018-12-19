@@ -1,4 +1,4 @@
-from requester import db
+from app import db
 
 
 class Client(db.Model):
@@ -32,14 +32,6 @@ class Feature(db.Model):
         'client.id'), nullable=False)
     product_areas = db.relationship('ProductArea', secondary='product_areas', lazy='subquery',
                                     backref=db.backref('features', lazy=True))
-
-    def __init__(self, title, description, client_priority, target_date, client_id, product_areas):
-        self.title = title
-        self.description = description
-        self.client_priority = client_priority
-        self.target_date = target_date
-        self.client_id = client_id
-        self.product_areas = product_areas
 
     def __repr__(self):
         return '<Feature {}>'.format(self.title)

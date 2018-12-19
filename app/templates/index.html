@@ -33,7 +33,7 @@
                                                 <tr class="align-middle">
 
                                                     <td class="d-none d-sm-none d-md-block">
-                                                        <a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                        <a href="{{ url_for('main.client_details', client_id=client.id) }}"
                                                            style="text-decoration: none; cursor: pointer">
                                                             <img
                                                                 src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
@@ -43,10 +43,10 @@
                                                         </a>
                                                     </td>
 
-                                                    <td><a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                    <td><a href="{{ url_for('main.client_details', client_id=client.id) }}"
                                                            style="text-decoration: None; cursor: pointer">{{ client.name }}</a>
                                                     </td>
-                                                    <td><a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                    <td><a href="{{ url_for('main.client_details', client_id=client.id) }}"
                                                            style="text-decoration: None; cursor: pointer"><span
                                                             class="badge badge-pill badge-primary">{{ client.features | length }}</span>
                                                         <small>Feature
@@ -55,7 +55,7 @@
                                                     </a>
                                                     </td>
                                                     <td class="d-none d-sm-none d-md-block">
-                                                        <a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                        <a href="{{ url_for('main.client_details', client_id=client.id) }}"
                                                            style="text-decoration: None; cursor: pointer">
                                                             <small>{% if client.features %}
                                                                 {{ client.features[-1].title }}
@@ -64,7 +64,7 @@
                                                             {% endif %}</small>
                                                         </a>
                                                     </td>
-                                                    <td><a href="{{ url_for('client_details', client_id=client.id) }}"
+                                                    <td><a href="{{ url_for('main.client_details', client_id=client.id) }}"
                                                            style="text-decoration: None; cursor: pointer">
                                                         <small>Date Due:{% if client.features %}
                                                             {{ moment(client.features[-1].target_date).format('MMMM Do, YYYY') }}

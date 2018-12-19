@@ -1,39 +1,11 @@
-import os
-from flask import Flask, render_template, flash, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
-from flask_moment import Moment
-from dotenv import load_dotenv
-load_dotenv()
-
-# Initialize app
-app = Flask(__name__)
-# Configure app from settings attached to the environment variable loaded from the .env
-
-app.config.from_object(os.getenv('APP_SETTINGS'))
+from flask import render_template, redirect, url_for, flash, jsonify
+from app import db
+from app.models import Client, Feature, ProductArea
+from app.main.forms import ClientForm, ProductAreaForm, FeatureForm
+from app.main import bp
 
 
-# initialise database
-db = SQLAlchemy(app)
-# Add bootstrap
-Bootstrap(app)
-
-# Add Flask Moment
-moment = Moment(app)
-
-# import the application views
-from requester import views
-
-#  Import the models
-from requester.models import Feature, Client, ProductArea
-
-# Import the form
-from requester.forms import FeatureForm, ClientForm, ProductAreaForm
-
-
-
-
-@app.route('/', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def index():
     """ The main view function, serves the home page of the dashboard and handles 3 forms for
     adding Features, adding Clients and adding Product Areas"""
@@ -83,7 +55,6 @@ def index():
         # when no feature has been added to the client, just add the feature
         if not client_features:
             add_commit_feature(form_data)
-            app.logger.warning("I entered this if statement")
 
         # Add feature if the current client priority has not been taken.
         elif not list(filter(lambda x: x.client_priority == 1, client_features)):
@@ -112,7 +83,7 @@ def index():
                     accumulator.append(equal_or_higher[idx].client_priority)
             add_commit_feature(form_data)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     else:
         flash(form.errors)
 
@@ -123,7 +94,7 @@ def index():
         c = Client(**data)
         db.session.add(c)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     else:
         flash(form.errors)
 
@@ -133,7 +104,7 @@ def index():
         p = ProductArea(**data)
         db.session.add(p)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('main.index'))
     else:
         flash(form.errors)
 
@@ -141,7 +112,7 @@ def index():
                            form2=form2, form3=form3)
 
 
-@app.route('/<int:client_id>', methods=['GET', 'POST'])
+@bp.route('/<int:client_id>', methods=['GET', 'POST'])
 def client_details(client_id):
     client = Client.query.get_or_404(client_id)
     features = db.session.query(Feature).filter(Feature.client_id == client_id).order_by('client_priority').all()

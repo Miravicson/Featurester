@@ -4,7 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(), override=True)
 
-from requester import app, db, models
+from app import app, db
 
 
 app.config.from_object(os.getenv('APP_SETTINGS'))
