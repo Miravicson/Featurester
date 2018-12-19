@@ -9,10 +9,8 @@ load_dotenv()
 # Initialize app
 app = Flask(__name__)
 # Configure app from settings attached to the environment variable loaded from the .env
-#  file or production environment variable
-app.config.from_object(os.getenv('APP_SETTINGS'))
 
-app.logger.warning(os.getenv('DATABASE_URL'))
+app.config.from_object(os.getenv('APP_SETTINGS'))
 
 
 # initialise database
@@ -30,10 +28,9 @@ from requester import views
 from requester.models import Feature, Client, ProductArea
 
 # Import the form
-from requester.features.forms import FeatureForm, ClientForm, ProductAreaForm
+from requester.forms import FeatureForm, ClientForm, ProductAreaForm
 
 
-# Home Page route
 
 
 @app.route('/', methods=['GET', 'POST'])

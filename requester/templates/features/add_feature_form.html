@@ -15,7 +15,7 @@
         {% endfor %}
     </div>
     <div class="form-group">
-        {{form.client_priority(class='form-control form-control-sm', type='number', min=0, placeholder='Priority')}}
+        {{form.client_priority(class='form-control form-control-sm', type='number', min=1, placeholder='Priority')}}
         {% for error in form.client_priority.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}

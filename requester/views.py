@@ -1,6 +1,7 @@
 from requester import app
 from flask import render_template
 
+
 # Error handler views
 
 @app.errorhandler(404)
@@ -9,7 +10,7 @@ def route_not_found(e):
 
     code = 404
     return render_template('snippets/error.html', code=code), code
-    
+
 
 @app.errorhandler(405)
 def method_not_found(e):
@@ -31,4 +32,3 @@ def internal_server_error(e):
     """
     code = 500
     return render_template('snippets/error.html', code=code), code
-    
