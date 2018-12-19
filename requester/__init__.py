@@ -3,13 +3,17 @@ from flask import Flask, render_template, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from dotenv import load_dotenv
+load_dotenv()
 
 # Initialize app
 app = Flask(__name__)
 # Configure app from settings attached to the environment variable loaded from the .env
 #  file or production environment variable
-# app.config.from_object(os.environ['APP_SETTINGS'])
 app.config.from_object(os.getenv('APP_SETTINGS'))
+
+app.logger.warning(os.getenv('DATABASE_URL'))
+
 
 # initialise database
 db = SQLAlchemy(app)
