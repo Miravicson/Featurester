@@ -116,4 +116,4 @@ def index():
 def client_details(client_id):
     client = Client.query.get_or_404(client_id)
     features = db.session.query(Feature).filter(Feature.client_id == client_id).order_by('client_priority').all()
-    return render_template('features/client_details.html', client=client, features=features)
+    return render_template('client_details.html', client=client, features=features)
