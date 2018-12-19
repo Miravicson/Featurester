@@ -1,9 +1,7 @@
 import os
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv(), override=True)
-
-
 base_dir = os.path.abspath(os.path.dirname(__file__))
+from dotenv import load_dotenv
+load_dotenv(os.path.join(base_dir, '.env'), override=True)
 
 
 class Config:
