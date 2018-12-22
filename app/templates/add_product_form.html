@@ -1,12 +1,12 @@
 <form method="post" role="form" action="">
-    {{ form3.hidden_tag() }}
+    {{ product_form.hidden_tag() }}
 
     <div class="form-group">
-        {{form3.name(class='form-control form-control-sm', placeholder='Name')}}
-        {% for error in form3.name.errors %}
+        {{product_form.name(class='form-control form-control-sm', placeholder='Name')}}
+        {% for error in product_form.name.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
     </div>
 
-    {{ form3.submit(class="btn btn-outline-dark btn-block text-light modal-style") }}
+    {{ product_form.submit_product(class="btn btn-outline-dark btn-block text-light modal-style") }}
 </form>

@@ -2,6 +2,7 @@ alembic==1.0.5
 argh==0.26.2
 autopep8==1.4.3
 Click==7.0
+coverage==4.5.2
 dominate==2.3.5
 Flask==1.0.2
 Flask-Bootstrap4==4.0.2

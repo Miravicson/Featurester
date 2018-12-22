@@ -1,38 +1,33 @@
 {% extends 'bootstrap/base.html' %}
 {% block title %}
-{% if title %}{{ title }} - Requester{% else %}Requester{% endif %}
+    {% if title %}{{ title }} - Requester{% else %}Requester{% endif %}
 {% endblock title %}
 
 {% block styles %}
 
-{{ super() }}
+    {% include 'snippets/css.html' %}
 
-{% include 'snippets/css.html' %}
-    
 {% endblock styles %}
 
 {% block body %}
-    
-{% block navbar %}
-{% include 'snippets/navbar.html' %}
-{% endblock navbar %}
 
-{% block content %}
-    
-{% endblock content %}
+    {% block navbar %}
+        {% include 'snippets/navbar.html' %}
+    {% endblock navbar %}
+
+    {% block content %}
+
+    {% endblock content %}
 
 
-{% block footer %}
-    {% include 'snippets/footer.html' %}
-{% endblock footer %}
+    {% block footer %}
+        {% include 'snippets/footer.html' %}
+    {% endblock footer %}
 
-{% block scripts %}
-    {{ super() }}
-
-    {% include 'snippets/js.html' %}
-    {{ moment.include_jquery() }}
-    {{ moment.include_moment() }}
-{% endblock scripts %}
+    {% block scripts %}
+        {% include 'snippets/js.html' %}
+        {{ moment.include_moment() }}
+    {% endblock scripts %}
 
 {% endblock body %}
 

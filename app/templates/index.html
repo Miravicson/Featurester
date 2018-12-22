@@ -23,67 +23,8 @@
                     <section class="client col-12">
                         <div class="card  bg-light mb-2 shadow">
                             {% if clients %}
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm">
-                                            <tbody class="align-middle">
+                                {% include 'snippets/client_card.html' %}
 
-                                            {% for client in clients %}
-
-                                                <tr class="align-middle">
-
-                                                    <td class="d-none d-sm-none d-md-block">
-                                                        <a href="{{ url_for('main.client_details', client_id=client.id) }}"
-                                                           style="text-decoration: none; cursor: pointer">
-                                                            <img
-                                                                src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
-                                                                class="rounded-circle border border-primary" alt=""
-                                                                width="30px"
-                                                                height="30px">
-                                                        </a>
-                                                    </td>
-
-                                                    <td><a href="{{ url_for('main.client_details', client_id=client.id) }}"
-                                                           style="text-decoration: None; cursor: pointer">{{ client.name }}</a>
-                                                    </td>
-                                                    <td><a href="{{ url_for('main.client_details', client_id=client.id) }}"
-                                                           style="text-decoration: None; cursor: pointer"><span
-                                                            class="badge badge-pill badge-primary">{{ client.features | length }}</span>
-                                                        <small>Feature
-                                                            Request
-                                                        </small>
-                                                    </a>
-                                                    </td>
-                                                    <td class="d-none d-sm-none d-md-block">
-                                                        <a href="{{ url_for('main.client_details', client_id=client.id) }}"
-                                                           style="text-decoration: None; cursor: pointer">
-                                                            <small>{% if client.features %}
-                                                                {{ client.features[-1].title }}
-                                                            {% else %}
-                                                                No features yet
-                                                            {% endif %}</small>
-                                                        </a>
-                                                    </td>
-                                                    <td><a href="{{ url_for('main.client_details', client_id=client.id) }}"
-                                                           style="text-decoration: None; cursor: pointer">
-                                                        <small>Date Due:{% if client.features %}
-                                                            {{ moment(client.features[-1].target_date).format('MMMM Do, YYYY') }}
-                                                        {% else %}
-                                                            No date attached
-                                                        {% endif %}</small>
-                                                    </a>
-                                                    </td>
-
-                                                </tr>
-
-                                            {% endfor %}
-
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
                             {% else %}
                                 <div class="text-center my-3 py-3">
                                     <button class="btn btn-sm btn-outline-primary px-5 py-3" role="button"

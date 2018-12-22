@@ -1,0 +1,58 @@
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <tbody class="align-middle">
+
+            {% for client in clients %}
+
+                <tr class="align-middle">
+
+
+                    <td class="d-none d-sm-none d-md-block">
+                        <img src="{{ url_for('static', filename='img/avatar-1577909.svg') }}"
+                             class="rounded-circle border border-primary"
+                             alt=""
+                             width="30px"
+                             height="30px">
+
+
+                    </td>
+
+                    <td>
+                        <a href="{{ url_for('main.client_details', client_id=client.id) }}" role="button"
+                           class="btn btn-sm btn-outline-primary">
+                            {{ client.name }}
+                        </a>
+
+                    </td>
+                    <td><span class="badge badge-pill badge-primary">{{ client.features | length }}</span>
+                        <small>Feature
+                            Request
+                        </small>
+                    </td>
+                    <td class="d-none d-sm-none d-md-block">
+                        <small>{% if client.features %}
+                            {{ client.features[-1].title }}
+                        {% else %}
+                            No features yet
+                        {% endif %}</small>
+                    </td>
+                    <td>
+                        <small>Date Due:{% if client.features %}
+                            {{ moment(client.features[-1].target_date).format('MMMM Do, YYYY') }}
+                        {% else %}
+                            No date attached
+                        {% endif %}</small>
+                    </td>
+
+
+                </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
