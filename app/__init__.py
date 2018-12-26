@@ -1,3 +1,5 @@
+
+
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -42,4 +44,3 @@ def create_app(config_class=config):
 
 #  Import the models
 from app import models
-

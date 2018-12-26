@@ -3,7 +3,6 @@ from app import db
 from app.models import Client, Feature, ProductArea
 from .forms import ClientForm, ProductAreaForm, FeatureForm
 from . import bp
-from .utils import get_feature_form_input, process_feature_form
 
 
 @bp.route('/', methods=['GET', 'POST'])
@@ -20,9 +19,9 @@ def index():
 
     if feature_form.submit_feature.data and feature_form.validate():
         # Get the form data
-        form_data = get_feature_form_input(feature_form)
-        # process the form data and check for existing client priority and reorder if possible
-        process_feature_form(db, form_data)
+        form_data = feature_form.get_data()
+        # process the form data and check for existing client priority and reorder the priorities of older features if there is a clash of priorities
+        Feature.save_sort_algo(form_data, db)
 
         return redirect(url_for('main.index'))
 
@@ -51,7 +50,8 @@ def index():
 @bp.route('/<int:client_id>', methods=['GET', 'POST'])
 def client_details(client_id):
     client = Client.query.get_or_404(client_id)
-    features = db.session.query(Feature).filter(Feature.client_id == client_id).order_by('client_priority').all()
+    features = db.session.query(Feature).filter(
+        Feature.client_id == client_id).order_by('client_priority').all()
     return render_template('client_details.html', client=client, features=features)
 
 

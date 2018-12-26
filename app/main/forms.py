@@ -22,6 +22,21 @@ class FeatureForm(FlaskForm):
         products = ProductArea.query.order_by('id').all()
         self.product_areas.choices = [(p.id, p.name) for p in products]
 
+    def get_data(self):
+        """Gets the input form data and packs it into a dictionary"""
+        data = dict()
+        data["title"] = self.title.data
+        data["description"] = self.description.data
+        data["target_date"] = self.target_date.data
+        data['client_priority'] = self.client_priority.data
+        data["client"] = Client.query.get(int(self.client_id.data))
+        data["product_areas"] = self.product_areas.data
+        return data
+
+
+    
+    
+
 
 class ClientForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])

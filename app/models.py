@@ -36,7 +36,7 @@ class Feature(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    client_priority = db.Column(db.Integer, nullable=False)
+    client_priority = db.Column(db.Integer, nullable=False, index=True)
     target_date = db.Column(db.DateTime, nullable=False)
     client_id = db.Column(db.Integer, db.ForeignKey(
         'client.id'), nullable=False)
@@ -57,6 +57,74 @@ class Feature(db.Model):
 
     def __repr__(self):
         return '<Feature {}>'.format(self.title)
+
+    @staticmethod
+    def add_commit_feature(form_data, db):
+        """takes forms data and create an instance of a feature adds to a session and makes commit"""
+
+        product_areas_data = form_data.pop('product_areas', None)
+
+        f = Feature(**form_data)
+        if product_areas_data:
+            product_areas = [ProductArea.query.get(
+                i) for i in product_areas_data]
+            for product_area in product_areas:
+                product_area.features.append(f)
+        db.session.add(f)
+        db.session.commit()
+
+    @staticmethod
+    def save_sort_algo(form_data, db):
+        """ An algorithm for sorting the features per client and ensuring that no two features have the same priority.
+        it takes in the form data from the feature form and db """
+
+        priority = form_data.get('client_priority')
+        client_id = form_data['client'].id
+
+        # Get all the features belonging to the particular client
+        client_features = db.session.query(Feature).filter(
+            Feature.client_id == client_id).all()
+
+        # when no feature has been added to the client, just add the feature
+        if not client_features:
+            Feature.add_commit_feature(form_data, db)
+
+        # Add feature if the current client priority has not been taken.
+
+        elif priority not in [feature.client_priority for feature in client_features]:
+            Feature.add_commit_feature(form_data, db)
+
+        else:
+            # Get all feature entries with priorities equal to or higher than the input priority
+            equal_or_higher = sorted(
+                (feature for feature in client_features if feature.client_priority >= priority))
+
+            # create an accumulator to compare previous priorities of adjacent entries in an ordered list
+            accumulator = list()
+            for idx in range(0, len(equal_or_higher)):
+                # check if the priority of the first feature is equal to the current priority
+                if idx == 0:
+                    if equal_or_higher[idx].client_priority == priority:
+                        # if the priorities compared are equal, increase the priority of the first element in the list by one and add it to session
+                        accumulator.append(
+                            equal_or_higher[idx].client_priority + 1)
+                        equal_or_higher[idx].client_priority = priority + 1
+                        db.session.add(equal_or_higher[idx])
+                    else:
+                        # if the priorities are not equal, just add the priority to the accumulator for the next comparison
+                        accumulator.append(
+                            equal_or_higher[idx].client_priority)
+                # compare the priority of the next feature in the list with the last priority in the accumulator,
+                elif equal_or_higher[idx].client_priority == accumulator[-1]:
+                    # if the priorities compared are equal, increase the priority of the feature in the list by one and add it to session
+                    accumulator.append(
+                        equal_or_higher[idx].client_priority + 1)
+                    equal_or_higher[idx].client_priority = accumulator[-2] + 1
+                    db.session.add(equal_or_higher[idx])
+                else:
+                    # if the priorities are not equal, just add the priority to the accumulator for the next comparison
+                    accumulator.append(equal_or_higher[idx].client_priority)
+            Feature.add_commit_feature(form_data, db)
 
 
 #  ProductArea helper table
