@@ -21,6 +21,8 @@ config = os.getenv('APP_SETTINGS')
 
 
 def create_app(config_class=config):
+    ''' factory function for creating the flask application instance. Accepts a configuration class and returns an instance of the flask application '''
+
     app = Flask(__name__)
     app.config.from_object(config_class)
 
