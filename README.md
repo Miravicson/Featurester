@@ -36,6 +36,7 @@ End with an example of getting some data out of the system or using it for a lit
 
 Explain how to run the automated tests for this system
 
+
 ### Break down into end to end tests
 
 Explain what these tests test and why
@@ -55,6 +56,17 @@ Give an example
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
+
+### Deploying application updates
+
+When you have made changes and pushed to github, you may update the server by signing in to the server and running the following commands
+
+```
+(venv) $ git pull                              # download the new version
+(venv) $ sudo supervisorctl stop featurester     # stop the current server
+(venv) $ flask db upgrade                      # upgrade the database
+(venv) $ sudo supervisorctl start featurester    # start a new server
+```
 
 ## Built With
 
