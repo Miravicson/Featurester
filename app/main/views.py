@@ -1,8 +1,10 @@
-from flask import render_template, redirect, url_for, flash
+from flask import flash, redirect, render_template, url_for
+
 from app import db
 from app.models import Client, Feature, ProductArea
-from .forms import ClientForm, ProductAreaForm, FeatureForm
+
 from . import bp
+from .forms import ClientForm, FeatureForm, ProductAreaForm
 
 
 @bp.route('/', methods=['GET', 'POST'])

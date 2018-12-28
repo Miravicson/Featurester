@@ -1,10 +1,20 @@
-import unittest
-from flask import url_for, Flask
-from tests.base import BasicsTestCase
-from dotenv import load_dotenv, find_dotenv
 import os
+import unittest
+from datetime import datetime
+
+from dotenv import find_dotenv, load_dotenv
+from flask import Flask, url_for
+from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
+
+from app import db, create_app
+from app.models import Client, Feature, ProductArea
+from tests.base import BasicsTestCase
 
 load_dotenv(find_dotenv())
+
 
 
 class FlaskClientTestCase(BasicsTestCase):
@@ -18,7 +28,7 @@ class FlaskClientTestCase(BasicsTestCase):
             # # self.assert200(response)
             response = self.client.get(url_for('main.index'))
             self.assert200(response)
-            self.assertTrue('' in response.get_data(as_text=True))
+            self.assertTrue('Requester' in response.get_data(as_text=True))
 
     def test_page_not_found(self):
         """ Test that a given route does not exists in the application"""
@@ -38,14 +48,43 @@ class FlaskClientTestCase(BasicsTestCase):
             self.assert405(response)
             self.assertTrue('405' in data)
 
-    def test_create_app(self):
-        from app import create_app
+    def test_factory_function(self):
 
-        config = os.getenv('APP_SETTINGS')
+        app = create_app(config_class=os.getenv('APP_SETTINGS'))
+        assert isinstance(app, Flask)
 
-        app = Flask(__name__)
-        app.config.from_object(config)
-        self.assertTrue(app == create_app(config_class=config))
+    
+
+    def test_delete_feature(self):
+        
+        with self.client:
+            # create client
+            client = self.create_dummy_client()
+            # create feature
+            feature = self.create_dummy_feature(client)
+            response = self.client.post(url_for('main.delete_features', client_id=client.id, feature_id=feature.id))
+            self.assertEqual(response.status, '302 FOUND')
+            self.assertTrue('Redirecting' in response.get_data(as_text=True))
+
+    def test_delete_client(self):
+        with self.client:
+            # create client
+            client = self.create_dummy_client()
+            response = self.client.post(url_for('main.delete_client', client_id=client.id))
+            self.assertEqual(response.status, '302 FOUND')
+            self.assertTrue('Redirecting' in response.get_data(as_text=True))
+
+    def test_client_details(self):
+        with self.client:
+            # create client
+            client = self.create_dummy_client()
+            response = self.client.get(
+                url_for('main.client_details', client_id=client.id))
+            self.assert200(response)
+            self.assertTrue('Client Details' in response.get_data(as_text=True))
+           
+        
+
 
 
 if __name__ == "__main__":

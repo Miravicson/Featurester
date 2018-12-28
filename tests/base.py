@@ -1,9 +1,13 @@
-import unittest
-from flask_testing import TestCase
-from flask import current_app
-from app import create_app, db
-from dotenv import load_dotenv, find_dotenv
 import os
+import unittest
+from datetime import datetime
+
+from dotenv import find_dotenv, load_dotenv
+from flask import current_app
+from flask_testing import TestCase
+
+from app import create_app, db
+from app.models import Client, Feature
 
 load_dotenv(find_dotenv())
 
@@ -28,3 +32,21 @@ class BasicsTestCase(TestCase):
 
     def test_app_is_testing(self):
         self.assertTrue(current_app.config['TESTING'])
+
+    def create_dummy_client(self):
+        ''' Test that a given feature is created '''
+        client = Client('Client A', 'clienta@company.com')
+        assert isinstance(client, Client)
+        db.session.add(client)
+        db.session.commit()
+        return Client.query.filter_by(name='Client A').first()
+
+    def create_dummy_feature(self, client):
+
+        date = datetime.date(datetime.today())
+        feature = Feature(
+            'Add footer', 'We need nice footer', 1, date, client)
+        assert isinstance(feature, Feature)
+        db.session.add(feature)
+        db.session.commit()
+        return Feature.query.filter_by(title='Add footer').first()

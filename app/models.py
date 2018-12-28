@@ -106,9 +106,9 @@ class Feature(db.Model):
                 if idx == 0:
                     if equal_or_higher[idx].client_priority == priority:
                         # if the priorities compared are equal, increase the priority of the first element in the list by one and add it to session
-                        accumulator.append(
-                            equal_or_higher[idx].client_priority + 1)
                         equal_or_higher[idx].client_priority = priority + 1
+                        accumulator.append(
+                            equal_or_higher[idx].client_priority)
                         db.session.add(equal_or_higher[idx])
                     else:
                         # if the priorities are not equal, just add the priority to the accumulator for the next comparison
@@ -116,15 +116,16 @@ class Feature(db.Model):
                             equal_or_higher[idx].client_priority)
                 # compare the priority of the next feature in the list with the last priority in the accumulator,
                 elif equal_or_higher[idx].client_priority == accumulator[-1]:
-                    # if the priorities compared are equal, increase the priority of the feature in the list by one and add it to session
+                    # if the priorities compared are equal,
+                    equal_or_higher[idx].client_priority = accumulator[-1] + 1 #increase the priority of the feature by one
                     accumulator.append(
-                        equal_or_higher[idx].client_priority + 1)
-                    equal_or_higher[idx].client_priority = accumulator[-2] + 1
-                    db.session.add(equal_or_higher[idx])
+                        equal_or_higher[idx].client_priority) # append this new priority to the accumulator for next comparison
+                    db.session.add(equal_or_higher[idx])      # add the modified feature with new priority to session for later commit
                 else:
-                    # if the priorities are not equal, just add the priority to the accumulator for the next comparison
+                    # if the priorities are not equal, 
+                    # just add the priority to the accumulator for the next comparison
                     accumulator.append(equal_or_higher[idx].client_priority)
-            Feature.add_commit_feature(form_data, db)
+            Feature.add_commit_feature(form_data, db) # create the new feature and commit the sessions
 
 
 #  ProductArea helper table
