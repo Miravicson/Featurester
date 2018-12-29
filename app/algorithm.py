@@ -1,3 +1,5 @@
+# An abstracted implementation of the algorithm that ensures that each feature attached to a client has a unique priority
+
 from builtins import sorted
 
 unsorted_list = [1]

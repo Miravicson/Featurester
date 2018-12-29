@@ -1,0 +1,6 @@
+DATABASE_URL="postgresql://flask:<db-password>@localhost:5432/requester"
+APP_SETTINGS=config.DevelopmentConfig
+TESTING_CONFIG=config.TestingConfig
+SECRET_KEY='<your-secret-key>'
+FLASK_APP=featurester.py
+FLASK_ENV=development

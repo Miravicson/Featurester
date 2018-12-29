@@ -1,0 +1,6 @@
+DATABASE_URL="mysql+pymysql://featurester:<db-password>@localhost:3306/requester"
+APP_SETTINGS=config.ProductionConfig
+TESTING_CONFIG=config.TestingConfig
+SECRET_KEY='<your-secret-key>'
+FLASK_APP=featurester.py
+

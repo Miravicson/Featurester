@@ -32,7 +32,6 @@ class ProductArea(db.Model):
 
 
 class Feature(db.Model):
-    """Feature Table"""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)

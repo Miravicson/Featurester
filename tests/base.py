@@ -41,11 +41,11 @@ class BasicsTestCase(TestCase):
         db.session.commit()
         return Client.query.filter_by(name='Client A').first()
 
-    def create_dummy_feature(self, client):
+    def create_dummy_feature(self, client, priority=1):
 
         date = datetime.date(datetime.today())
         feature = Feature(
-            'Add footer', 'We need nice footer', 1, date, client)
+            'Add footer', 'We need nice footer', priority, date, client)
         assert isinstance(feature, Feature)
         db.session.add(feature)
         db.session.commit()

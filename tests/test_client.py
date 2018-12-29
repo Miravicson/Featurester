@@ -16,7 +16,6 @@ from tests.base import BasicsTestCase
 load_dotenv(find_dotenv())
 
 
-
 class FlaskClientTestCase(BasicsTestCase):
     def test_home_page(self):
         """
@@ -24,11 +23,9 @@ class FlaskClientTestCase(BasicsTestCase):
         :return:
         """
         with self.client:
-            # response = self.client.get('/')
-            # # self.assert200(response)
             response = self.client.get(url_for('main.index'))
             self.assert200(response)
-            self.assertTrue('Requester' in response.get_data(as_text=True))
+            self.assertTrue('Featurester' in response.get_data(as_text=True))
 
     def test_page_not_found(self):
         """ Test that a given route does not exists in the application"""
@@ -48,21 +45,20 @@ class FlaskClientTestCase(BasicsTestCase):
             self.assert405(response)
             self.assertTrue('405' in data)
 
-    def test_factory_function(self):
+    # def test_factory_function(self):
 
-        app = create_app(config_class=os.getenv('APP_SETTINGS'))
-        assert isinstance(app, Flask)
-
-    
+    #     app = create_app(config_class=os.getenv('APP_SETTINGS'))
+    #     assert isinstance(app, Flask)
 
     def test_delete_feature(self):
-        
+
         with self.client:
             # create client
             client = self.create_dummy_client()
             # create feature
             feature = self.create_dummy_feature(client)
-            response = self.client.post(url_for('main.delete_features', client_id=client.id, feature_id=feature.id))
+            response = self.client.post(
+                url_for('main.delete_features', client_id=client.id, feature_id=feature.id))
             self.assertEqual(response.status, '302 FOUND')
             self.assertTrue('Redirecting' in response.get_data(as_text=True))
 
@@ -70,7 +66,8 @@ class FlaskClientTestCase(BasicsTestCase):
         with self.client:
             # create client
             client = self.create_dummy_client()
-            response = self.client.post(url_for('main.delete_client', client_id=client.id))
+            response = self.client.post(
+                url_for('main.delete_client', client_id=client.id))
             self.assertEqual(response.status, '302 FOUND')
             self.assertTrue('Redirecting' in response.get_data(as_text=True))
 
@@ -81,10 +78,8 @@ class FlaskClientTestCase(BasicsTestCase):
             response = self.client.get(
                 url_for('main.client_details', client_id=client.id))
             self.assert200(response)
-            self.assertTrue('Client Details' in response.get_data(as_text=True))
-           
-        
-
+            self.assertTrue(
+                'Client Details' in response.get_data(as_text=True))
 
 
 if __name__ == "__main__":

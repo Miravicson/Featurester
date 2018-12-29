@@ -70,7 +70,7 @@ The python dependencies are tracked in the requirements.txt file. I will list th
 
 6. Setup the Database. Create a postgres database with the name **requester** **flask** associated with the username **flask** and choose a password **\<db-password\>**
 
-7. Create a .env file. The .env file should follow the template in the file **Featurester/local/.env**
+7. Create a .env file. The .env file should follow the template in the file **Featurester/local/.localenv**
 
 8. Upgrade the database. Run the command below
 
@@ -264,7 +264,7 @@ create a virtual environment and populate it with all the package dependencies,
     (venv) $ pip install -r requirements.txt
 ```
 
-A template of the .env file needed is included here in the deployment repository, copy the .env template from the deployment folder and move it to the root folder (Featurester). Modfiy the template accordingly.
+A template of the .env file needed is included here in the __deployment/.serverenv__ file, copy the contents __deployment/.serverenv__ template from the deployment folder and paste into a __.env__ file in the __Featurester__ folder. Modfiy the template accordingly.
 
 To create a strong secrete key value, run the following command
 
