@@ -5,22 +5,24 @@
 <div class="container-fluid mb-0">
     <div class="row">
         <!-- Header Starts here -->
-        <div class="col-12 col-md-4 header order-md-2">
+        <div class="col-12 col-md-5 header order-md-2">
             <div>
-                <div class="card my-4 py-5">
+                <div class="card my-4 py-5 shadow">
                     <div class="mx-auto">
                         <img src="{{ url_for('static', filename='img/avatar-1577909.svg') }}" class="rounded-circle border border-primary"
                             alt="" width="150px" height="150px">
                     </div>
                     <div class="mx-auto mt-3">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><span class="text-left">Name:</span> <span class="text-right">{{
+                            <li class="list-group-item"><span class="text-left"></span><b>Name:</b></span> <span class="text-right">{{
                                     client.name }}</span></li>
-                            <li class="list-group-item"><span class="text-left">Email:</span> <span class="text-right">{{
+                            <li class="list-group-item"><span class="text-left"></span><b>Email:</b></span> <span class="text-right">{{
                                     client.email }}</span></li>
-                            <li class="list-group-item"><span class="text-left">Client ID:</span> <span class="text-right">{{
+                            <li class="list-group-item"><span class="text-left"></span><b>Client ID:</b></span> <span
+                                    class="text-right">{{
                                     client.id }}</span></li>
-                            <li class="list-group-item"><span class="text-left">Feature Requests:</span> <span class="text-right">{{
+                            <li class="list-group-item"><span class="text-left"></span><b>Feature Requests:</b></span>
+                                <span class="text-right">{{
                                     client.features | length }}</span></li>
                         </ul>
                         <a class="btn btn-outline-danger btn-block mt-3" href="{{ url_for('main.delete_client', client_id=client.id) }}"
@@ -34,49 +36,55 @@
 
         </div>
         {% block other_content %}
-        <div class="col-12 col-md-8 order-md-1 content pt-3 px-2">
-            <div class="client col-12 mb-2">
+        <div class="col-12 col-md-7 order-md-1 pt-3 px-2">
 
-                {% if features %}
-                {% for feature in features %}
-                <div class="card mt-3 mx-3">
+            {% if features %}
+            {% for feature in features %}
+            <div id="feature__card" class="card mt-3 mx-5 shadow">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><span class="text-left">Title:</span>
-                                        <span class="text-right">{{ feature.title }}</span></li>
-                                    <li class="list-group-item"><span class="text-left">Date:</span>
-                                        <span class="text-right">{{ moment(feature.target_date).format('MMMM Do, YYYY')
-                                            }}</span>
-                                    </li>
-                                    <li class="list-group-item"><span class="text-left">Description:</span> <span class="text-right">{{
-                                            feature.description }}</span></li>
-                                    <li class="list-group-item"><span class="text-left">Client Priority:</span>
-                                        <span class="text-right">{{ feature.client_priority }}</span>
-                                    </li>
-                                </ul>
-                                <div class='text-center'>
-                                    <a class="btn btn-outline-danger mt-3" href="{{ url_for('main.delete_features', client_id=client.id, feature_id=feature.id) }}"
-                                        role="button">
-                                        Delete
-                                    </a>
+                        <div class="col-7 text-center">
+                            <h3 class="feature__title">{{ feature.title }}</h3>
+                            <hr>
+                            <p>{{
+                                feature.description }}</p>
 
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% else %}
-                <div class="card mt-2" style="width: inherit;">
-                    <div class="text-center my-3 py-3">
-                        <h2>No Features Yet</h2>
+                        <div class="col-5 text-center feature__card--details">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>Date Due:</b><span class="text-info">
+                                        {{ moment(feature.target_date).format('MMMM Do, YYYY')
+                                        }}
+                                    </span>
+                                </li>
+                                <li class="list-group-item">Client Priority:
+                                    <span class="text-info">{{ feature.client_priority }}</span>
+                                </li>
+                            </ul>
+                            <a class="btn btn-outline-danger mt-3 pt-1 feature__delete" href="{{ url_for('main.delete_features', client_id=client.id, feature_id=feature.id) }}"
+                                role="button">
+                                Delete
+                            </a>
+
+                        </div>
+
                     </div>
 
                 </div>
-                {% endif %}
+                <div class='text-center'>
+
+                </div>
+
             </div>
+            {% endfor %}
+            {% else %}
+            <div class="card mt-2 shadow" style="width: inherit;">
+                <div class="text-center my-3 py-3">
+                    <h2>No Features Yet</h2>
+                </div>
+
+            </div>
+            {% endif %}
         </div>
         {% endblock other_content %}
     </div>
