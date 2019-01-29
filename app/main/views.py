@@ -7,7 +7,12 @@ from . import bp
 from .forms import ClientForm, FeatureForm, ProductAreaForm
 
 
-@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET'])
+def landing():
+    """ The Landing Page for the featurester application"""
+    return render_template('landing.html')
+
+@bp.route('/app', methods=['GET', 'POST'])
 def index():
     """ The main view function, serves the home page of the dashboard and handles 3 forms for
     adding Features, adding Clients and adding Product Areas"""

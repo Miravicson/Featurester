@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Featurester</h1>
+    <p class="lead">Track your clients feature requests.</p>
+    <hr class="my-4" />
+    <p>
+        Orders the feature requests by priorities and reminds you of imminent
+        due dates attached to the feature requests.
+    </p>
+    <a
+        class="btn btn-primary btn-lg"
+        href="{{ url_for('main.index') }}"
+        role="button"
+        >Add Request</a
+    >
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Add Clients</h5>
+                    <p class="card-text">
+                        You will need to a client list to track their profile. <br>
+                        Create clients by clicking the add client button on the app page.
+                    </p>
+                    <hr>
+                    <h3>Step</h3>
+                    <h2 class="float-right"><span class="badge badge-pill badge-primary">1</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Add Product Category</h5>
+                    <p class="card-text">
+                        Feature Requests are grouped into categories. 
+                        <br>
+                        You can group your feature request by creating categories for groupings, and the including the categories when you finally add your feature request.
+                    </p>
+                    <hr>
+                    <h3>Step</h3>
+                    <h2 class="float-right"><span class="badge badge-pill badge-primary">2</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Create Feature Request.</h5>
+                    <p class="card-text">
+                        Finally! You get to create a feature request for the client you have added.
+                        <br>
+                        Each feature request has a priority associated with the client. You can also select a product category for the feature request.
+                    </p>
+                    <hr />
+                    <p>Step</p>
+                    <h2 class="float-right"><span class="badge badge-pill badge-primary">3</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

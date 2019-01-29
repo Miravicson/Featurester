@@ -43,6 +43,13 @@ body {
     font-size: 1.1em !important;
 }
 
+.jumbotron {
+    background-image: url('../img/jumbotron.jpg') !important;
+    background-size: cover;
+    background-color: rgba(39, 38, 38, 0.367);
+    color: white;
+    background-blend-mode: darken;
+}
 
 .header {
     background-color: #0d6eaa !important;
